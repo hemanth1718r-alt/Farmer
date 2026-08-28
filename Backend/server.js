@@ -464,7 +464,7 @@ app.put("/api/staff/applications/:id/call", (req, res) => {
 
 // Update Status
 app.put("/api/staff/applications/:id/status", (req, res) => {
-  const { status } = req.body;
+  const { status, paymentAmount } = req.body;
   const d = db();
   const b = d.bookings.find(x => x.id === req.params.id);
   if (!b) return res.status(404).json({ message: "Application not found." });
@@ -484,6 +484,9 @@ app.put("/api/staff/applications/:id/status", (req, res) => {
   }
   
   b.status = status;
+  if (status === "Payment Processed" && paymentAmount !== undefined) {
+    b.paymentAmount = Number(paymentAmount);
+  }
   b.updatedAt = new Date().toISOString();
   save(d);
   
@@ -493,7 +496,7 @@ app.put("/api/staff/applications/:id/status", (req, res) => {
   } else if (status === "Produce Graded") {
     msg = `Your produce for booking ${b.id} has been graded.`;
   } else if (status === "Payment Processed") {
-    msg = `Payment of your procurement application ${b.id} has been processed successfully.`;
+    msg = `Payment of ₹${paymentAmount || b.paymentAmount || 0} for your procurement application ${b.id} has been processed successfully.`;
   }
   notify(b.phone, msg);
   

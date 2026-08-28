@@ -282,16 +282,34 @@ function initDashboard() {
     return;
   }
   
-  // Set date input to today
-  $("date").value = new Date().toISOString().slice(0, 10);
+  // Restore saved centre and date from sessionStorage if available
+  const savedCentre = sessionStorage.getItem("staffCentre");
+  if (savedCentre) {
+    $("centre").value = savedCentre;
+  }
+  
+  const savedDate = sessionStorage.getItem("staffDate");
+  if (savedDate) {
+    $("date").value = savedDate;
+  } else {
+    $("date").value = new Date().toISOString().slice(0, 10);
+  }
   
   // Bind events
-  $("centre").onchange = loadAll;
-  $("date").onchange = loadAll;
+  $("centre").onchange = () => {
+    sessionStorage.setItem("staffCentre", $("centre").value);
+    loadAll();
+  };
+  $("date").onchange = () => {
+    sessionStorage.setItem("staffDate", $("date").value);
+    loadAll();
+  };
   $("btnRefresh").onclick = loadAll;
   
   $("btnLogout").onclick = () => {
     sessionStorage.removeItem("staff");
+    sessionStorage.removeItem("staffCentre");
+    sessionStorage.removeItem("staffDate");
     location.href = "staff-login.html";
   };
   
@@ -553,11 +571,34 @@ async function callFarmer(bookingId) {
 }
 
 async function updateStatus(bookingId, status) {
+  let paymentAmount = null;
+  if (status === "Payment Processed") {
+    const promptMsg = currentLang === "kn" 
+      ? "ಖರೀದಿ ಪಾವತಿ ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ (₹):"
+      : currentLang === "hi"
+      ? "खरीद भुगतान राशि दर्ज करें (₹):"
+      : "Enter payment amount (₹):";
+      
+    const errPromptMsg = currentLang === "kn"
+      ? "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಪಾವತಿ ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ."
+      : currentLang === "hi"
+      ? "कृपया एक वैध सकारात्मक भुगतान राशि दर्ज करें."
+      : "Please enter a valid positive payment amount.";
+
+    const amountStr = prompt(promptMsg);
+    if (amountStr === null) return; // User cancelled
+    paymentAmount = parseFloat(amountStr);
+    if (isNaN(paymentAmount) || paymentAmount <= 0) {
+      alert(errPromptMsg);
+      return;
+    }
+  }
+
   try {
     const r = await fetch(`${API_URL}/staff/applications/${bookingId}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status })
+      body: JSON.stringify({ status, paymentAmount })
     });
     const d = await r.json();
     

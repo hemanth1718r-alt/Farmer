@@ -747,7 +747,7 @@ async function loadDashboardData() {
         const stepsHTML = statuses.map((statusName, index) => {
           let stepClass = "";
           let checkMark = "○";
-          if (index < currentIndex) {
+          if (index < currentIndex || (index === currentIndex && b.status === "Payment Processed")) {
             stepClass = "completed";
             checkMark = "✓";
           } else if (index === currentIndex) {
@@ -772,7 +772,7 @@ async function loadDashboardData() {
                 <p>${b.centre} • ${b.date} • ${b.slot}</p>
               </div>
               <span class="pill" style="background:${b.status === 'Cancelled' ? '#ffe0e0' : b.status === 'Payment Processed' ? '#ebf8e5' : '#e9f5df'}; color:${b.status === 'Cancelled' ? '#c84d4d' : b.status === 'Payment Processed' ? '#236b3b' : '#24683a'}">
-                ${getTranslatedStatus(b.status)}
+                ${getTranslatedStatus(b.status)}${b.status === 'Payment Processed' && b.paymentAmount ? ` (₹${b.paymentAmount})` : ''}
               </span>
             </div>
             
