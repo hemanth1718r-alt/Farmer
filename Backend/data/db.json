@@ -73,6 +73,18 @@
       "distance": 0,
       "perishable": true,
       "createdAt": "2026-08-28T10:31:23.715Z"
+    },
+    {
+      "id": "FRM91683728",
+      "name": "abhay",
+      "phone": "9987654321",
+      "password": "123456",
+      "idNumber": "",
+      "crop": "",
+      "quantity": 0,
+      "distance": 0,
+      "perishable": false,
+      "createdAt": "2026-08-28T10:45:16.837Z"
     }
   ],
   "bookings": [
@@ -157,6 +169,40 @@
       "createdAt": "2026-08-28T10:35:38.497Z",
       "updatedAt": "2026-08-28T10:36:49.655Z",
       "paymentAmount": 501
+    },
+    {
+      "id": "APP95245144",
+      "farmerId": "FRM91683728",
+      "farmerName": "abhay",
+      "phone": "9987654321",
+      "crop": "Paddy",
+      "quantity": 10,
+      "centre": "Main Procurement Centre",
+      "date": "2026-08-28",
+      "slot": "02:00 PM - 02:30 PM",
+      "priorityScore": 1,
+      "priorityReason": "Normal",
+      "status": "Payment Processed",
+      "createdAt": "2026-08-28T10:45:52.451Z",
+      "updatedAt": "2026-08-28T10:49:18.024Z",
+      "paymentAmount": 500
+    },
+    {
+      "id": "APP97973418",
+      "farmerId": "FRM33127339",
+      "farmerName": "hemanth",
+      "phone": "9887654321",
+      "crop": "Wheat",
+      "quantity": 10,
+      "centre": "Main Procurement Centre",
+      "date": "2026-08-28",
+      "slot": "02:00 PM - 02:30 PM",
+      "priorityScore": 2,
+      "priorityReason": "Priority: perishable crop",
+      "status": "Payment Processed",
+      "createdAt": "2026-08-28T10:46:19.734Z",
+      "updatedAt": "2026-08-28T10:49:29.975Z",
+      "paymentAmount": 700
     }
   ],
   "notifications": [
@@ -382,6 +428,83 @@
       "phone": "9887654321",
       "message": "Payment of ₹501 for your procurement application APP33849786 has been processed successfully.",
       "createdAt": "2026-08-28T10:36:49.661Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT91684590",
+      "phone": "9987654321",
+      "message": "Welcome abhay. Your Farmer ID is FRM91683728.",
+      "createdAt": "2026-08-28T10:45:16.845Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT95245542",
+      "phone": "9987654321",
+      "message": "Your AgriQueue slot booking APP95245144 is confirmed. Centre: Main Procurement Centre, Date: 2026-08-28, Time: 02:00 PM - 02:30 PM. Queue Position: #1.",
+      "createdAt": "2026-08-28T10:45:52.455Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT97973992",
+      "phone": "9887654321",
+      "message": "Your AgriQueue slot booking APP97973418 is confirmed. Centre: Main Procurement Centre, Date: 2026-08-28, Time: 02:00 PM - 02:30 PM. Queue Position: #1.",
+      "createdAt": "2026-08-28T10:46:19.739Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT02642539",
+      "phone": "9987654321",
+      "message": "Your turn is now. Please proceed to the procurement counter.",
+      "createdAt": "2026-08-28T10:47:06.425Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT15280541",
+      "phone": "9987654321",
+      "message": "Your produce for booking APP95245144 has been weighed successfully.",
+      "createdAt": "2026-08-28T10:49:12.805Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT15364756",
+      "phone": "9987654321",
+      "message": "Your produce for booking APP95245144 has been graded.",
+      "createdAt": "2026-08-28T10:49:13.647Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT15802922",
+      "phone": "9987654321",
+      "message": "Payment of ₹500 for your procurement application APP95245144 has been processed successfully.",
+      "createdAt": "2026-08-28T10:49:18.029Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT15991610",
+      "phone": "9887654321",
+      "message": "Your turn is now. Please proceed to the procurement counter.",
+      "createdAt": "2026-08-28T10:49:19.916Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT16503440",
+      "phone": "9887654321",
+      "message": "Your produce for booking APP97973418 has been weighed successfully.",
+      "createdAt": "2026-08-28T10:49:25.034Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT16603435",
+      "phone": "9887654321",
+      "message": "Your produce for booking APP97973418 has been graded.",
+      "createdAt": "2026-08-28T10:49:26.034Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT16998173",
+      "phone": "9887654321",
+      "message": "Payment of ₹700 for your procurement application APP97973418 has been processed successfully.",
+      "createdAt": "2026-08-28T10:49:29.981Z",
       "channel": "SMS-MOCK"
     }
   ]
