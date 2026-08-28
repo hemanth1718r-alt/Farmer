@@ -78,13 +78,14 @@ function getSlotMinutes(slotStr) {
   return hrs * 60 + mins;
 }
 
+// FIX 1: Only count "Slot Booked" as actively waiting in the queue
 function activeForSlot(d, centre, date, slot) {
   return d.bookings.filter(
-    x => x.centre === centre && 
-         x.date === date && 
-         x.slot === slot && 
-         x.status !== "Cancelled" && 
-         x.status !== "Payment Processed"
+    x =>
+      x.centre === centre &&
+      x.date === date &&
+      x.slot === slot &&
+      x.status === "Slot Booked"
   );
 }
 
@@ -231,8 +232,9 @@ app.get("/api/slots", (req, res) => {
   ];
   
   res.json(slots.map(slot => {
+    // FIX 4: Paid/Completed farmers do not take up capacity
     const booked = d.bookings.filter(
-      b => b.centre === centre && b.date === date && b.slot === slot && b.status !== "Cancelled"
+      b => b.centre === centre && b.date === date && b.slot === slot && b.status !== "Cancelled" && b.status !== "Payment Processed"
     ).length;
     return {
       slot,
@@ -249,14 +251,40 @@ app.get("/api/slots", (req, res) => {
 // Create Booking
 app.post("/api/bookings", (req, res) => {
   const { farmerId, centre, date, slot } = req.body;
+  
+  // FIX 5: Validate Centre, Slot, and Past Dates
+  const validCentres = [
+    "Main Procurement Centre",
+    "North Village Centre",
+    "Market Yard Centre"
+  ];
+  const validSlots = [
+    "09:00 AM - 09:30 AM",
+    "09:30 AM - 10:00 AM",
+    "10:00 AM - 10:30 AM",
+    "10:30 AM - 11:00 AM",
+    "11:00 AM - 11:30 AM",
+    "11:30 AM - 12:00 PM",
+    "02:00 PM - 02:30 PM",
+    "02:30 PM - 03:00 PM",
+    "03:00 PM - 03:30 PM"
+  ];
+
+  if (!validCentres.includes(centre)) {
+    return res.status(400).json({ message: "Invalid procurement centre." });
+  }
+  if (!validSlots.includes(slot)) {
+    return res.status(400).json({ message: "Invalid time slot." });
+  }
+  const today = new Date().toISOString().split("T")[0];
+  if (date < today) {
+    return res.status(400).json({ message: "Booking date cannot be in the past." });
+  }
+
   const d = db();
   const f = d.farmers.find(x => x.id === farmerId);
   if (!f) return res.status(404).json({ message: "Farmer not found." });
-  if (!centre || !date || !slot) {
-    return res.status(400).json({ message: "Centre, date, and slot are required." });
-  }
   
-  // Check active bookings: cannot book if there is an active (non-cancelled, non-payment-processed) booking.
   const activeBooking = d.bookings.find(
     b => b.farmerId === farmerId && b.status !== "Cancelled" && b.status !== "Payment Processed"
   );
@@ -267,10 +295,11 @@ app.post("/api/bookings", (req, res) => {
     });
   }
   
-  // Check capacity
+  // FIX 4 (Consistency): Paid/Completed do not take up booking capacity
   const count = d.bookings.filter(
-    b => b.centre === centre && b.date === date && b.slot === slot && b.status !== "Cancelled"
+    b => b.centre === centre && b.date === date && b.slot === slot && b.status !== "Cancelled" && b.status !== "Payment Processed"
   ).length;
+  
   if (count >= 10) {
     return res.status(409).json({ message: "Selected time slot is already full." });
   }
@@ -332,8 +361,10 @@ app.put("/api/bookings/:id/cancel", (req, res) => {
   const d = db();
   const b = d.bookings.find(x => x.id === req.params.id);
   if (!b) return res.status(404).json({ message: "Application not found." });
-  if (b.status === "Payment Processed") {
-    return res.status(400).json({ message: "Completed applications cannot be cancelled." });
+  
+  // FIX 6: Restrict cancellation strictly to "Slot Booked"
+  if (b.status !== "Slot Booked") {
+    return res.status(400).json({ message: "This application can no longer be cancelled." });
   }
   
   b.status = "Cancelled";
@@ -373,7 +404,6 @@ app.get("/api/staff/applications", (req, res) => {
   }
   const d = db();
   
-  // Filter active applications (we do NOT show Cancelled and Payment Processed in the live processing queue)
   let arr = d.bookings.filter(
     b => b.centre === centre && 
          b.date === date && 
@@ -381,7 +411,6 @@ app.get("/api/staff/applications", (req, res) => {
          b.status !== "Payment Processed"
   );
   
-  // Sort: Chronological slot time, then Priority score (descending), then Booking creation time (ascending)
   arr.sort((a, b) => {
     const timeA = getSlotMinutes(a.slot);
     const timeB = getSlotMinutes(b.slot);
@@ -392,7 +421,6 @@ app.get("/api/staff/applications", (req, res) => {
     return new Date(a.createdAt) - new Date(b.createdAt);
   });
   
-  // Map output to include queuePosition and estimatedWait in their specific slot queue
   res.json(arr.map(b => {
     const pos = position(d, b);
     return {
@@ -421,6 +449,10 @@ app.put("/api/staff/applications/:id/call", (req, res) => {
   const b = d.bookings.find(x => x.id === req.params.id);
   if (!b) return res.status(404).json({ message: "Application not found." });
   
+  if (b.status !== "Slot Booked") {
+    return res.status(400).json({ message: "Can only call farmers with 'Slot Booked' status." });
+  }
+
   b.status = "Arrived";
   b.updatedAt = new Date().toISOString();
   save(d);
@@ -431,15 +463,24 @@ app.put("/api/staff/applications/:id/call", (req, res) => {
 
 // Update Status
 app.put("/api/staff/applications/:id/status", (req, res) => {
-  const allowed = ["Slot Booked", "Arrived", "Produce Weighed", "Produce Graded", "Payment Processed"];
   const { status } = req.body;
-  if (!allowed.includes(status)) {
-    return res.status(400).json({ message: "Invalid status value." });
-  }
-  
   const d = db();
   const b = d.bookings.find(x => x.id === req.params.id);
   if (!b) return res.status(404).json({ message: "Application not found." });
+  
+  // FIX 3: Enforce Strict Pipeline Workflow
+  const nextStatus = {
+    "Slot Booked": "Arrived",
+    "Arrived": "Produce Weighed",
+    "Produce Weighed": "Produce Graded",
+    "Produce Graded": "Payment Processed"
+  };
+
+  if (nextStatus[b.status] !== status) {
+    return res.status(400).json({
+      message: `Invalid workflow. Current status is "${b.status}". Next allowed status is "${nextStatus[b.status] || "None"}".`
+    });
+  }
   
   b.status = status;
   b.updatedAt = new Date().toISOString();
