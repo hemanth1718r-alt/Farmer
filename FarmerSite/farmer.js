@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if ($("loginForm") && !$("forgot").classList.contains("wizard-forgot")) {
+  if ($("loginForm")) {
     initLogin();
   }
   if ($("regForm")) {
