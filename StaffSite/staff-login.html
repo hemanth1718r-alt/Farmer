@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Staff Login | AgriQueue</title>
+  <link rel="stylesheet" href="staff.css">
+</head>
+<body class="staff-auth">
+  <div class="staff-login" id="loginPage">
+    <div class="logo">🏢 AgriQueue <span>STAFF</span></div>
+    <span class="tag">PROCUREMENT CENTRE</span>
+    <h1>Staff Login</h1>
+    <p>Access live farmer applications, queue listings, and update procurement statuses.</p>
+    
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" type="text" required placeholder="Enter username">
+      
+      <label for="password">Password</label>
+      <input id="password" type="password" required placeholder="Enter password">
+      
+      <button class="btn" type="submit">Enter Staff Dashboard</button>
+    </form>
+    
+    <div class="hint">
+      Demo Credentials:<br>
+      Username: <b>admin</b><br>
+      Password: <b>admin123</b>
+    </div>
+    
+    <div id="msg"></div>
+  </div>
+  
+  <script src="staff.js"></script>
+</body>
+</html>
