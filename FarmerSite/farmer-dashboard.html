@@ -9,11 +9,21 @@
 <body>
   <div id="farmerDashboard">
     <header>
-      <div class="logo">🌾 AgriQueue <span>FARMER PORTAL</span></div>
+      <div class="logo">🌾 AgriQueue <span data-i18n="farmer_portal">FARMER PORTAL</span></div>
       <nav>
-        <a href="#book">Book Slot</a>
-        <a href="#status">My Applications</a>
-        <button id="btnLogout">Logout</button>
+        <a href="#book" data-i18n="book_title">Book Slot</a>
+        <a href="#status" data-i18n="apps_title">My Applications</a>
+        
+        <!-- Header Language Switcher Dropdown -->
+        <div class="lang-switcher-header">
+          🌐 <select id="langSelect">
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        
+        <button id="btnLogout" data-i18n="logout_btn">Logout</button>
       </nav>
     </header>
     
@@ -21,12 +31,12 @@
       <!-- Welcome Section -->
       <section class="welcome">
         <div>
-          <span class="tag">FARMER ACCOUNT</span>
-          <h1>Hello, <span id="fname">Farmer</span> 👋</h1>
-          <p>Book a procurement slot, track your queue status, and monitor your payment progress live.</p>
+          <span class="tag" data-i18n="f_account">FARMER ACCOUNT</span>
+          <h1><span data-i18n="hello">Hello,</span> <span id="fname">Farmer</span> 👋</h1>
+          <p data-i18n="dash_desc">Book a procurement slot, track your queue status, and monitor your payment progress live.</p>
         </div>
         <div class="farmer-id">
-          Farmer ID<br>
+          <span data-i18n="f_id">Farmer ID</span><br>
           <b id="fid">FRM000000</b>
         </div>
       </section>
@@ -34,56 +44,71 @@
       <!-- Quick Info Stats -->
       <section class="quick">
         <div>
-          <small>REGISTERED CROP</small>
+          <small data-i18n="reg_crop">REGISTERED CROP</small>
           <b id="fcrop">—</b>
         </div>
         <div>
-          <small>PRODUCE QUANTITY</small>
+          <small data-i18n="prod_qty">PRODUCE QUANTITY</small>
           <b id="fqty">0 kg</b>
         </div>
         <div>
-          <small>MOBILE NUMBER</small>
+          <small data-i18n="mob_num">MOBILE NUMBER</small>
           <b id="fmobile">—</b>
         </div>
         <div>
-          <small>SMS NOTIFICATIONS</small>
+          <small data-i18n="sms_notif">SMS NOTIFICATIONS</small>
           <b id="ncount">0</b>
         </div>
       </section>
       
-      <!-- Slot Booking Section -->
+      <!-- Slot Booking Section (with crop, quantity, travel distance inputs) -->
       <section id="book" class="card">
-        <span class="tag">01 • SLOT BOOKING</span>
-        <h2>Book Procurement Slot</h2>
+        <span class="tag" data-i18n="slot_booking">01 • SLOT BOOKING</span>
+        <h2 data-i18n="book_title">Book Procurement Slot</h2>
         <form id="bookForm" class="grid">
-          <label for="centre">Procurement Centre
-            <select id="centre">
-              <option value="Main Procurement Centre">Main Procurement Centre</option>
-              <option value="North Village Centre">North Village Centre</option>
-              <option value="Market Yard Centre">Market Yard Centre</option>
-            </select>
-          </label>
+          <label for="centre" data-i18n="centre_lbl">Procurement Centre</label>
+          <select id="centre">
+            <option value="Main Procurement Centre">Main Procurement Centre</option>
+            <option value="North Village Centre">North Village Centre</option>
+            <option value="Market Yard Centre">Market Yard Centre</option>
+          </select>
           
-          <label for="date">Select Date
-            <input id="date" type="date" required>
-          </label>
+          <label for="date" data-i18n="date_lbl">Select Date</label>
+          <input id="date" type="date" required>
           
-          <label for="slot">Available Time Slots
-            <select id="slot" required>
-              <option value="">Select date first</option>
-            </select>
-          </label>
+          <label for="slot" data-i18n="time_lbl">Available Time Slots</label>
+          <select id="slot" required>
+            <option value="" data-i18n="opt_select_date">Select date first</option>
+          </select>
           
-          <button class="btn" type="submit">Submit Procurement Request</button>
+          <label for="crop" data-i18n="crop_lbl">Crop Type</label>
+          <select id="crop" required>
+            <option value="">Select crop type</option>
+            <option value="Paddy">Paddy</option>
+            <option value="Wheat">Wheat</option>
+            <option value="Maize">Maize</option>
+            <option value="Cotton">Cotton</option>
+            <option value="Groundnut">Groundnut</option>
+            <option value="Sugarcane">Sugarcane</option>
+            <option value="Other">Other Crop</option>
+          </select>
+          
+          <label for="quantity" data-i18n="qty_lbl">Produce Quantity (kg)</label>
+          <input id="quantity" type="number" min="1" required placeholder="Estimated weight in kg">
+          
+          <label for="distance" data-i18n="dist_lbl">Travel Distance (km)</label>
+          <input id="distance" type="number" min="0" value="0" required placeholder="Distance to procurement centre">
+          
+          <button class="btn" type="submit" data-i18n="submit_req">Submit Procurement Request</button>
         </form>
         <div id="bookMsg"></div>
       </section>
       
       <!-- Applications and Live Status -->
       <section id="status" class="card">
-        <span class="tag">02 • MY APPLICATIONS & STATUS</span>
-        <h2>My Live Applications</h2>
-        <p style="color: var(--muted); margin-top: -10px; font-size: 14px; margin-bottom: 20px;">
+        <span class="tag" data-i18n="my_apps">02 • MY APPLICATIONS & STATUS</span>
+        <h2 data-i18n="apps_title">My Live Applications</h2>
+        <p style="color: var(--muted); margin-top: -10px; font-size: 14px; margin-bottom: 20px;" data-i18n="apps_desc">
           Calculated automatically. Active applications will refresh every 5 seconds.
         </p>
         <div id="apps">
@@ -93,9 +118,9 @@
       
       <!-- SMS History Section -->
       <section class="card">
-        <span class="tag">03 • SMS LOG HISTORY</span>
-        <h2>Notifications & SMS History</h2>
-        <p style="color: var(--muted); margin-top: -10px; font-size: 14px; margin-bottom: 20px;">
+        <span class="tag" data-i18n="sms_history">03 • SMS LOG HISTORY</span>
+        <h2 data-i18n="sms_title">Notifications & SMS History</h2>
+        <p style="color: var(--muted); margin-top: -10px; font-size: 14px; margin-bottom: 20px;" data-i18n="sms_desc">
           Mock SMS history sent to your registered mobile number.
         </p>
         <div id="notifications">

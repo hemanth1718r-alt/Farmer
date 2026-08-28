@@ -7,24 +7,34 @@
   <link rel="stylesheet" href="staff.css">
 </head>
 <body class="staff-auth">
+  <!-- Language Switcher in Upper Right -->
+  <div class="lang-switcher">
+    🌐 <select id="langSelect">
+      <option value="en">English</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+  </div>
+
   <div class="staff-login" id="loginPage">
-    <div class="logo">🏢 AgriQueue <span>STAFF</span></div>
-    <span class="tag">PROCUREMENT CENTRE</span>
-    <h1>Staff Login</h1>
-    <p>Access live farmer applications, queue listings, and update procurement statuses.</p>
+    <div class="logo" data-i18n="logo_title">🏢 AgriQueue</div>
+    <span class="tag" data-i18n="staff_portal">STAFF</span>
+    <h1 data-i18n="staff_login">Staff Login</h1>
+    <p data-i18n="login_sub">Access live farmer applications, queue listings, and update procurement statuses.</p>
     
     <form id="loginForm">
-      <label for="username">Username</label>
-      <input id="username" type="text" required placeholder="Enter username">
+      <label for="username" data-i18n="username_lbl">Username</label>
+      <input id="username" type="text" required data-i18n-placeholder="placeholder_user" placeholder="Enter username">
       
-      <label for="password">Password</label>
-      <input id="password" type="password" required placeholder="Enter password">
+      <label for="password" data-i18n="pass_lbl" style="margin-top: 15px;">Password</label>
+      <input id="password" type="password" required data-i18n-placeholder="placeholder_pass" placeholder="Enter password">
       
-      <button class="btn" type="submit">Enter Staff Dashboard</button>
+      <!-- Strict Spacing: Spacing of 24px above button, managed by staff.css -->
+      <button class="btn" type="submit" data-i18n="login_btn">Enter Staff Dashboard</button>
     </form>
     
     <div class="hint">
-      Demo Credentials:<br>
+      <span data-i18n="demo_creds">Demo Credentials:</span><br>
       Username: <b>admin</b><br>
       Password: <b>admin123</b>
     </div>

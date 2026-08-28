@@ -1,13 +1,14 @@
 :root {
-  --blue: #245a9a;
-  --dark: #142c45;
-  --lime: #e2f16d;
-  --bg: #f2f5f8;
-  --ink: #172330;
-  --muted: #6d7985;
-  --line: #dce3ea;
-  --green: #287042;
+  --blue: #2b5c90;
+  --light-blue: #407cb8;
+  --dark: #12283e;
+  --bg: #f3f6f9;
+  --ink: #1f2a35;
+  --muted: #677583;
+  --line: #cfd8e1;
+  --green: #24753c;
   --red: #c84d4d;
+  --accent: #e8eef3;
 }
 
 * {
@@ -16,9 +17,10 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
   color: var(--ink);
+  line-height: 1.5;
 }
 
 button, input, select {
@@ -27,107 +29,137 @@ button, input, select {
 
 a {
   color: var(--blue);
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
+a:hover {
+  color: var(--light-blue);
+}
+
+/* Staff Auth Card & Form */
 .staff-auth {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 20px;
-  background: radial-gradient(circle at 20% 10%, #dbe9ff, transparent 30%), var(--bg);
+  padding: 30px 15px;
+  background: radial-gradient(circle at 20% 10%, #dbe9ff, transparent 35%), var(--bg);
+  position: relative;
 }
 
 .staff-login {
-  width: min(470px, 100%);
+  width: min(480px, 100%);
   background: #fff;
-  padding: 43px;
-  border-radius: 24px;
+  padding: 40px;
+  border-radius: 20px;
   border: 1px solid var(--line);
-  box-shadow: 0 25px 70px #18344d14;
+  box-shadow: 0 15px 35px rgba(18, 40, 62, 0.08);
 }
 
 .logo {
   font-weight: 900;
-  font-size: 22px;
+  font-size: 24px;
+  color: var(--dark);
 }
 
 .logo span {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--blue);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  margin-left: 5px;
 }
 
 .tag {
   display: inline-block;
-  background: var(--lime);
-  padding: 7px 10px;
+  background: var(--accent);
+  color: var(--dark);
+  padding: 6px 12px;
   border-radius: 99px;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  margin-top: 18px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
 }
 
 .staff-login h1 {
-  font-size: 42px;
-  letter-spacing: -2px;
-  margin: 15px 0 5px;
+  font-size: 32px;
+  color: var(--dark);
+  margin: 20px 0 8px;
+  letter-spacing: -0.5px;
 }
 
 .staff-login p {
   color: var(--muted);
-  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 25px;
 }
 
 .staff-login label {
   display: block;
-  font-size: 12px;
-  font-weight: 900;
-  margin-top: 15px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
 }
 
 .staff-login input {
   width: 100%;
-  padding: 13px;
+  padding: 12px 15px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  margin-top: 7px;
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-bottom: 18px;
   background: #fbfcfd;
+  transition: all 0.2s;
+}
+
+.staff-login input:focus {
+  border-color: var(--blue);
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(43, 92, 144, 0.15);
+}
+
+/* Spacing Requirement: Spacing of 20px-28px before the login button */
+.staff-login button.btn {
+  margin-top: 24px;
 }
 
 .btn {
   border: 0;
   background: var(--blue);
   color: #fff;
-  padding: 13px 18px;
-  border-radius: 10px;
-  font-weight: 900;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
   width: 100%;
-  transition: opacity 0.2s;
+  text-align: center;
+  transition: background 0.2s;
+  display: block;
 }
 
 .btn:hover {
-  opacity: 0.95;
+  background: var(--light-blue);
 }
 
 .hint {
-  background: #f2f5f8;
+  background: #f8fafc;
   padding: 12px;
-  border-radius: 10px;
-  margin: 15px 0;
+  border-radius: 8px;
+  margin: 20px 0;
   font-size: 12px;
   border-left: 3px solid var(--blue);
+  color: var(--dark);
 }
 
 .error, .success {
-  padding: 12px;
-  border-radius: 9px;
-  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 15px 0;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .error {
@@ -142,132 +174,190 @@ a {
   border: 1px solid #d4ecc6;
 }
 
+/* Language Switcher Styling */
+.lang-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.lang-switcher select, .lang-switcher-header select {
+  border: 0;
+  background: transparent;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  color: var(--dark);
+  padding: 2px 0;
+  width: auto;
+}
+
+.lang-switcher-header {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Dashboard Header & Main Layout */
 header {
-  height: 72px;
+  height: 75px;
   background: #fff;
   border-bottom: 1px solid var(--line);
   padding: 0 6%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 header button {
   background: #fff;
   border: 1px solid var(--line);
-  padding: 9px 14px;
-  border-radius: 9px;
-  font-weight: 800;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
+  color: var(--dark);
+  transition: all 0.2s;
 }
 
 header button:hover {
-  background: #f2f5f8;
+  background: var(--bg);
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
 main {
   max-width: 1250px;
   margin: auto;
-  padding: 30px 20px;
+  padding: 40px 20px;
 }
 
 .hero {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
   gap: 25px;
-  padding: 35px 0;
+  padding-bottom: 35px;
 }
 
 .hero h1 {
-  font-size: 55px;
-  letter-spacing: -3px;
-  margin: 14px 0 5px;
+  font-size: 44px;
+  color: var(--dark);
+  letter-spacing: -1px;
+  margin: 10px 0 5px;
 }
 
 .hero p {
   color: var(--muted);
-}
-
-.hero button {
-  width: auto;
+  margin: 0;
+  font-size: 15px;
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .stats > div {
   background: #fff;
   border: 1px solid var(--line);
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(24, 52, 77, 0.02);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(18, 40, 62, 0.01);
 }
 
 .stats small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .stats b {
   display: block;
-  font-size: 35px;
+  font-size: 32px;
   color: var(--blue);
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .card {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 25px;
-  margin-top: 18px;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
 }
 
 .card h2 {
-  font-size: 24px;
+  font-size: 20px;
+  color: var(--dark);
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .toolbar {
   display: flex;
   gap: 15px;
-  align-items: end;
+  align-items: flex-end;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   background: #f8fafc;
-  padding: 15px;
+  padding: 15px 20px;
   border-radius: 12px;
   border: 1px solid var(--line);
 }
 
 .toolbar label {
-  font-size: 11px;
-  font-weight: 900;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
 }
 
 .toolbar input, .toolbar select {
   display: block;
-  margin-top: 7px;
-  padding: 11px;
+  margin-top: 6px;
+  padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 8px;
   background: #fff;
   font-size: 13px;
+  width: auto;
+  min-width: 180px;
 }
 
 .live {
-  font-size: 11px;
-  font-weight: 900;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--green);
-  padding: 11px;
+  padding: 10px 0;
   display: flex;
   align-items: center;
 }
@@ -276,7 +366,7 @@ main {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: #3caf63;
+  background: #28a745;
   border-radius: 50%;
   margin-right: 6px;
   animation: pulse 1.5s infinite;
@@ -288,30 +378,35 @@ main {
   100% { transform: scale(0.9); opacity: 0.6; }
 }
 
+/* Active Applications Table */
 .table-wrap {
-  overflow: auto;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1150px;
+  min-width: 1100px;
 }
 
 th, td {
-  padding: 14px 10px;
+  padding: 15px 12px;
   text-align: left;
   border-bottom: 1px solid var(--line);
-  font-size: 12px;
+  font-size: 13px;
   vertical-align: top;
 }
 
 th {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
-  letter-spacing: 1px;
-  font-weight: 900;
+  letter-spacing: 0.5px;
+  font-weight: 800;
   text-transform: uppercase;
+  background: #f8fafc;
 }
 
 td small {
@@ -328,23 +423,23 @@ td small {
 
 .pill {
   display: inline-block;
-  background: #e9f2ff;
-  color: #285f9b;
-  padding: 6px 10px;
+  background: var(--accent);
+  color: var(--blue);
+  padding: 6px 12px;
   border-radius: 99px;
-  font-size: 10px;
-  font-weight: 900;
+  font-size: 11px;
+  font-weight: 800;
+  border: 1px solid rgba(43, 92, 144, 0.1);
 }
 
 .priority-badge {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #7d4f18;
   background: #fef5e7;
-  padding: 3px 6px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
   display: inline-block;
-  margin-top: 4px;
   border: 1px solid #fbe4c7;
 }
 
@@ -362,7 +457,7 @@ td small {
 
 .actions {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
@@ -370,11 +465,12 @@ td small {
   background: #fff;
   border: 1px solid var(--line);
   padding: 6px 10px;
-  border-radius: 7px;
-  font-size: 10px;
-  font-weight: 800;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  color: var(--dark);
 }
 
 .actions button:hover {
@@ -389,7 +485,7 @@ td small {
 }
 
 .actions button.btn-call:hover {
-  background: #1d4d85;
+  background: var(--light-blue);
 }
 
 .actions button.btn-pay {
@@ -399,31 +495,37 @@ td small {
 }
 
 .actions button.btn-pay:hover {
-  background: #1e5230;
+  background: #1e6030;
 }
 
 .empty {
-  padding: 25px;
+  padding: 40px;
   text-align: center;
-  background: #f5f7f9;
+  background: #f8fafc;
   border-radius: 12px;
   color: var(--muted);
   border: 1px dashed var(--line);
 }
 
+/* Activity Feed */
 .feed {
   display: grid;
   grid-template-columns: 120px 120px 1fr 100px;
-  gap: 10px;
-  padding: 12px;
+  gap: 15px;
+  padding: 15px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 11px;
+  font-size: 12px;
   align-items: center;
+}
+
+.feed:last-child {
+  border-bottom: 0;
 }
 
 .feed p {
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--dark);
 }
 
 .feed small {
@@ -435,22 +537,24 @@ td small {
   color: var(--blue);
 }
 
-/* New Application Notification Banner in Staff Dashboard */
+/* Alert Banner */
 .notification-banner {
   background: #e0f2fe;
   border: 1px solid #bae6fd;
   color: #0369a1;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 10px rgba(3, 105, 161, 0.05);
   animation: slideDown 0.3s ease-out;
 }
 
 .notification-banner div {
   font-size: 13px;
+  font-weight: 600;
 }
 
 .notification-banner button {
@@ -459,8 +563,9 @@ td small {
   border: 0;
   padding: 6px 12px;
   border-radius: 6px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 .notification-banner button:hover {
@@ -472,7 +577,8 @@ td small {
   to { transform: translateY(0); opacity: 1; }
 }
 
-@media (max-width: 900px) {
+/* Mobile Responsiveness */
+@media (max-width: 950px) {
   .stats {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -484,10 +590,11 @@ td small {
   }
   .hero {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
+    gap: 15px;
   }
   .hero h1 {
-    font-size: 40px;
+    font-size: 32px;
   }
   .feed {
     grid-template-columns: 1fr;
@@ -497,6 +604,16 @@ td small {
     text-align: left;
   }
   .staff-login {
-    padding: 28px;
+    padding: 30px 20px;
+  }
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar input, .toolbar select {
+    width: 100%;
+  }
+  header nav a {
+    display: none;
   }
 }

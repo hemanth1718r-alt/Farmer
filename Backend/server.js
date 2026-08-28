@@ -120,8 +120,8 @@ function safeFarmer(f) {
 
 // Register
 app.post("/api/farmer/register", (req, res) => {
-  const { name, phone, password, idNumber, crop, quantity, distance, perishable } = req.body;
-  if (!name || !phone || !password || !idNumber || !crop || !quantity) {
+  const { name, phone, password, perishable } = req.body;
+  if (!name || !phone || !password) {
     return res.status(400).json({ message: "Please fill all required fields." });
   }
   if (!/^[0-9]{10}$/.test(phone)) {
@@ -137,10 +137,10 @@ app.post("/api/farmer/register", (req, res) => {
     name,
     phone,
     password,
-    idNumber,
-    crop,
-    quantity: Number(quantity),
-    distance: Number(distance || 0),
+    idNumber: "",
+    crop: "",
+    quantity: 0,
+    distance: 0,
     perishable: !!perishable,
     createdAt: new Date().toISOString()
   };
@@ -250,7 +250,7 @@ app.get("/api/slots", (req, res) => {
 
 // Create Booking
 app.post("/api/bookings", (req, res) => {
-  const { farmerId, centre, date, slot } = req.body;
+  const { farmerId, centre, date, slot, crop, quantity, distance } = req.body;
   
   // FIX 5: Validate Centre, Slot, and Past Dates
   const validCentres = [
@@ -304,14 +304,15 @@ app.post("/api/bookings", (req, res) => {
     return res.status(409).json({ message: "Selected time slot is already full." });
   }
   
-  const p = calculatePriority(f.distance, f.perishable);
+  const bookingDistance = Number(distance !== undefined ? distance : (f.distance || 0));
+  const p = calculatePriority(bookingDistance, f.perishable);
   const booking = {
     id: newId("APP"),
     farmerId: f.id,
     farmerName: f.name,
     phone: f.phone,
-    crop: f.crop,
-    quantity: f.quantity,
+    crop: crop || f.crop || "Paddy",
+    quantity: Number(quantity !== undefined ? quantity : (f.quantity || 100)),
     centre,
     date,
     slot,

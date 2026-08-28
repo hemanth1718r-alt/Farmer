@@ -7,51 +7,76 @@
   <link rel="stylesheet" href="farmer.css">
 </head>
 <body class="auth">
+  <!-- Language Switcher in Upper Right -->
+  <div class="lang-switcher">
+    🌐 <select id="langSelect">
+      <option value="en">English</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+  </div>
+
   <div class="auth-card" id="loginPage">
-    <div class="logo">🌾 AgriQueue</div>
-    <span class="tag">FARMER PORTAL</span>
-    <h1>Farmer Login</h1>
-    <p>Sign in using your mobile number and password to access the slot booking system.</p>
+    <div class="logo" data-i18n="logo_title">🌾 AgriQueue</div>
+    <span class="tag" data-i18n="farmer_portal">FARMER PORTAL</span>
+    <h1 data-i18n="farmer_login">Farmer Login</h1>
+    <p data-i18n="login_sub">Sign in using your mobile number and password to access the slot booking system.</p>
     
     <form id="loginForm">
-      <label for="phone">Mobile Number</label>
-      <input id="phone" type="text" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required placeholder="Enter 10-digit mobile number">
+      <label for="phone" data-i18n="mobile_lbl">Mobile Number</label>
+      <input id="phone" type="text" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required data-i18n-placeholder="placeholder_phone" placeholder="Enter 10-digit mobile number">
       
-      <label for="password">Password</label>
-      <input id="password" type="password" required placeholder="Enter your password">
+      <label for="password" data-i18n="pass_lbl" style="margin-top: 15px;">Password</label>
+      <input id="password" type="password" required data-i18n-placeholder="placeholder_pass" placeholder="Enter your password">
       
-      <button class="btn" type="submit">Sign In</button>
+      <button class="btn" type="submit" data-i18n="signin_btn">Sign In</button>
     </form>
     
-    <div class="row-links">
-      <button class="link" id="btnForgot">Forgot Password?</button>
-      <a href="farmer-register.html">New Farmer? Register Here</a>
+    <div class="row-links" id="rowLinks">
+      <button class="link" id="btnForgot" data-i18n="forgot_link">Forgot Password?</button>
+      <a href="farmer-register.html" data-i18n="new_farmer">New Farmer? Register Here</a>
     </div>
     
     <div id="message"></div>
     
-    <!-- Forgot Password Reset Box -->
-    <div id="forgot" class="hidden">
+    <!-- Forgot Password Step-by-Step Wizard -->
+    <div id="forgot" class="hidden wizard-forgot">
       <hr style="border: 0; border-top: 1px solid var(--line); margin: 25px 0;">
-      <h3>Reset Password</h3>
-      <p style="font-size: 12px; margin-top: -10px; color: var(--muted);">Request a verification reset code for this demo.</p>
+      <h3 data-i18n="forgot_title">Reset Password</h3>
+      <p style="font-size: 12px; margin-top: -10px; color: var(--muted);" data-i18n="forgot_sub">Enter your registered mobile number to receive a verification reset code.</p>
       
-      <label for="fphone">Mobile Number</label>
-      <input id="fphone" type="text" maxlength="10" placeholder="10-digit mobile number">
-      
-      <button class="btn" type="button" id="btnSendCode" style="background: var(--dark); margin-top: 10px;">Send Reset Code</button>
-      
-      <div id="codeBox" class="hidden">
-        <div id="demoCode" class="demo-code"></div>
-        
-        <label for="rcode">6-Digit Reset Code</label>
-        <input id="rcode" type="text" maxlength="6" placeholder="Enter reset code">
-        
-        <label for="newpass">New Password</label>
-        <input id="newpass" type="password" minlength="6" placeholder="Enter at least 6 characters">
-        
-        <button class="btn" type="button" id="btnResetPassword" style="margin-top: 15px;">Update Password</button>
+      <!-- Step 1: Request Code -->
+      <div id="step1">
+        <label for="fphone" data-i18n="mobile_lbl">Mobile Number</label>
+        <input id="fphone" type="text" maxlength="10" data-i18n-placeholder="placeholder_phone" placeholder="10-digit mobile number">
+        <button class="btn" type="button" id="btnSendCode">Send Reset Code</button>
       </div>
+      
+      <!-- Step 2: Verification Code -->
+      <div id="step2" class="hidden">
+        <div id="demoCode" class="demo-code"></div>
+        <label for="rcode" data-i18n="otp_lbl">6-Digit Reset Code (OTP)</label>
+        <input id="rcode" type="text" maxlength="6" data-i18n-placeholder="placeholder_otp" placeholder="Enter reset code">
+        <button class="btn" type="button" id="btnVerifyCode" style="margin-top: 15px;">Verify OTP</button>
+      </div>
+      
+      <!-- Step 3: Input New Password -->
+      <div id="step3" class="hidden">
+        <label for="newpass" data-i18n="new_pass_lbl">New Password</label>
+        <input id="newpass" type="password" minlength="6" data-i18n-placeholder="placeholder_newpass" placeholder="Enter at least 6 characters">
+        
+        <label for="confpass" data-i18n="confirm_pass_lbl" style="margin-top: 15px;">Confirm New Password</label>
+        <input id="confpass" type="password" minlength="6" data-i18n-placeholder="placeholder_confpass" placeholder="Re-enter new password">
+        
+        <button class="btn" type="button" id="btnResetPassword">Reset Password</button>
+      </div>
+      
+      <!-- Step 4: Success state -->
+      <div id="step4" class="hidden">
+        <div class="success" data-i18n="msg_reset_success">Password reset successfully. You can now login.</div>
+      </div>
+      
+      <button class="link back" id="btnBackToLogin" data-i18n="back_to_login">Back to Farmer Login</button>
     </div>
   </div>
   

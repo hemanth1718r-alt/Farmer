@@ -1,5 +1,106 @@
 {
-  "farmers": [],
-  "bookings": [],
-  "notifications": []
+  "farmers": [
+    {
+      "id": "FRM09464381",
+      "name": "Amogha",
+      "phone": "9980488776",
+      "password": "aa@1122",
+      "idNumber": "221144556677",
+      "crop": "Groundnut",
+      "quantity": 20,
+      "distance": 3,
+      "perishable": true,
+      "createdAt": "2026-08-28T09:24:54.643Z"
+    },
+    {
+      "id": "FRM19758620",
+      "name": "Amogha",
+      "phone": "9980488656",
+      "password": "amogha@123",
+      "idNumber": "221144556677",
+      "crop": "Wheat",
+      "quantity": 100,
+      "distance": 5,
+      "perishable": true,
+      "createdAt": "2026-08-28T09:26:37.586Z",
+      "resetCode": "730298",
+      "resetExpires": 1787910272560
+    }
+  ],
+  "bookings": [
+    {
+      "id": "APP24362166",
+      "farmerId": "FRM19758620",
+      "farmerName": "Amogha",
+      "phone": "9980488656",
+      "crop": "Wheat",
+      "quantity": 100,
+      "centre": "Market Yard Centre",
+      "date": "2026-08-28",
+      "slot": "09:00 AM - 09:30 AM",
+      "priorityScore": 2,
+      "priorityReason": "Priority: perishable crop",
+      "status": "Payment Processed",
+      "createdAt": "2026-08-28T09:27:23.621Z",
+      "updatedAt": "2026-08-28T09:29:23.090Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "NT09464889",
+      "phone": "9980488776",
+      "message": "Welcome Amogha. Your Farmer ID is FRM09464381.",
+      "createdAt": "2026-08-28T09:24:54.648Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT19758930",
+      "phone": "9980488656",
+      "message": "Welcome Amogha. Your Farmer ID is FRM19758620.",
+      "createdAt": "2026-08-28T09:26:37.589Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT24362724",
+      "phone": "9980488656",
+      "message": "Your AgriQueue slot booking APP24362166 is confirmed. Centre: Market Yard Centre, Date: 2026-08-28, Time: 09:00 AM - 09:30 AM. Queue Position: #1.",
+      "createdAt": "2026-08-28T09:27:23.627Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT32056317",
+      "phone": "9980488656",
+      "message": "Your turn is now. Please proceed to the procurement counter.",
+      "createdAt": "2026-08-28T09:28:40.563Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT33837551",
+      "phone": "9980488656",
+      "message": "Your produce for booking APP24362166 has been weighed successfully.",
+      "createdAt": "2026-08-28T09:28:58.375Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT35325552",
+      "phone": "9980488656",
+      "message": "Your produce for booking APP24362166 has been graded.",
+      "createdAt": "2026-08-28T09:29:13.255Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT36309577",
+      "phone": "9980488656",
+      "message": "Payment of your procurement application APP24362166 has been processed successfully.",
+      "createdAt": "2026-08-28T09:29:23.095Z",
+      "channel": "SMS-MOCK"
+    },
+    {
+      "id": "NT67256416",
+      "phone": "9980488656",
+      "message": "AgriQueue password reset code: 730298. Valid for 10 minutes.",
+      "createdAt": "2026-08-28T09:34:32.564Z",
+      "channel": "SMS-MOCK"
+    }
+  ]
 }

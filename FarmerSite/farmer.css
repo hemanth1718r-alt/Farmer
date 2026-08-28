@@ -1,12 +1,14 @@
 :root {
-  --green: #247a45;
-  --dark: #163e27;
-  --lime: #dcf36c;
-  --bg: #f4f7ef;
-  --ink: #18251d;
-  --muted: #6c776f;
-  --line: #dce4d9;
+  --green: #2d7a4d;
+  --light-green: #3ea066;
+  --mint: #eef7f2;
+  --dark: #1b3d29;
+  --cream: #fafaf7;
+  --ink: #1e2822;
+  --muted: #626e67;
+  --line: #d1ddd6;
   --red: #c84d4d;
+  --accent: #f2ede4;
 }
 
 * {
@@ -15,32 +17,40 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', Arial, sans-serif;
-  background: var(--bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--mint);
   color: var(--ink);
+  line-height: 1.5;
 }
 
 a {
   text-decoration: none;
   color: var(--green);
-  font-weight: 800;
+  font-weight: 700;
+  transition: color 0.2s;
 }
 
+a:hover {
+  color: var(--light-green);
+}
+
+/* Auth Cards & Layout */
 .auth {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 25px;
-  background: radial-gradient(circle at 80% 10%, #e2f49a, transparent 28%), var(--bg);
+  padding: 30px 15px;
+  background: radial-gradient(circle at 80% 10%, #e2f49a, transparent 35%), var(--mint);
+  position: relative;
 }
 
 .auth-card {
   background: #fff;
-  width: min(470px, 100%);
-  padding: 42px;
+  width: min(480px, 100%);
+  padding: 40px;
   border: 1px solid var(--line);
-  border-radius: 25px;
-  box-shadow: 0 25px 70px #23452b14;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(27, 61, 41, 0.08);
 }
 
 .auth-card.wide {
@@ -48,108 +58,180 @@ a {
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
+  color: var(--dark);
 }
 
 .tag {
   display: inline-block;
-  background: var(--lime);
-  padding: 7px 11px;
+  background: var(--accent);
+  color: var(--dark);
+  padding: 6px 12px;
   border-radius: 99px;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
 }
 
 .auth h1 {
-  font-size: 42px;
-  letter-spacing: -2px;
-  margin: 15px 0 7px;
+  font-size: 32px;
+  color: var(--dark);
+  margin: 20px 0 8px;
+  letter-spacing: -0.5px;
 }
 
 .auth p {
   color: var(--muted);
-  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 25px;
 }
 
+/* Language Switcher Styling */
+.lang-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.lang-switcher select, .lang-switcher-header select {
+  border: 0;
+  background: transparent;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  color: var(--dark);
+  padding: 2px 0;
+  width: auto;
+}
+
+.lang-switcher-header {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Forms and Spacing */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 20px;
 }
 
 label {
-  font-weight: 900;
+  font-weight: 700;
   font-size: 13px;
-  margin-bottom: 5px;
+  color: var(--dark);
   display: block;
 }
 
 input, select {
   width: 100%;
-  margin-top: 7px;
-  padding: 13px;
+  margin-top: 8px;
+  padding: 12px 15px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #fbfcf9;
+  border-radius: 8px;
+  background: #fbfbf9;
   font-size: 14px;
+  color: var(--ink);
+  transition: all 0.2s;
 }
 
+input:focus, select:focus {
+  border-color: var(--green);
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(45, 122, 77, 0.15);
+}
+
+/* Spacing Requirement: Buttons must have 20px - 28px of spacing */
 form {
-  margin-top: 25px;
+  margin-top: 20px;
+}
+
+form .btn {
+  margin-top: 24px; /* Strict Spacing: 24px spacing above the submit button */
 }
 
 .btn {
   border: 0;
-  border-radius: 11px;
+  border-radius: 8px;
   background: var(--green);
   color: #fff;
-  padding: 13px 18px;
-  font-weight: 900;
+  padding: 14px 20px;
+  font-weight: 700;
   cursor: pointer;
   width: 100%;
   text-align: center;
-  transition: opacity 0.2s;
+  transition: background 0.2s;
+  display: block;
 }
 
 .btn:hover {
-  opacity: 0.9;
+  background: var(--light-green);
+}
+
+.btn.secondary {
+  background: var(--dark);
+}
+
+.btn.secondary:hover {
+  background: var(--green);
 }
 
 .grid .btn {
   grid-column: span 2;
-  margin-top: 10px;
 }
 
 .row-links {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  margin-top: 18px;
-  font-size: 12px;
+  align-items: center;
+  margin-top: 24px;
+  font-size: 13px;
 }
 
 .link {
   border: 0;
   background: none;
   color: var(--green);
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   padding: 0;
+  font-size: 13px;
+}
+
+.link:hover {
+  color: var(--light-green);
+  text-decoration: underline;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
+/* Errors & success alerts */
 .error, .success, .empty {
-  padding: 14px;
-  border-radius: 11px;
-  margin-top: 14px;
-  font-weight: 500;
-  font-size: 14px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .error {
@@ -165,27 +247,28 @@ form {
 }
 
 .demo-code {
-  background: #f2f6eb;
+  background: var(--accent);
   padding: 12px;
-  border-radius: 10px;
-  margin: 12px 0;
-  font-weight: 900;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-weight: 700;
   border: 1px dashed var(--green);
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--dark);
 }
 
 .back {
   display: block;
-  margin-top: 20px;
+  margin-top: 24px;
   text-align: center;
+  font-weight: 700;
 }
 
 .check {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   grid-column: span 2;
   cursor: pointer;
 }
@@ -193,10 +276,12 @@ form {
 .check input {
   width: auto;
   margin: 0;
+  transform: scale(1.1);
 }
 
+/* Header UI */
 header {
-  height: 72px;
+  height: 75px;
   background: #fff;
   border-bottom: 1px solid var(--line);
   padding: 0 6%;
@@ -205,24 +290,28 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 header .logo span {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--green);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  margin-left: 5px;
 }
 
 header nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 }
 
 header nav a {
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 header nav a:hover {
@@ -232,20 +321,25 @@ header nav a:hover {
 header nav button, header > button {
   border: 1px solid var(--line);
   background: white;
-  padding: 9px 13px;
-  border-radius: 9px;
-  font-weight: 800;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.2s;
+  color: var(--dark);
 }
 
 header nav button:hover {
-  background: #f4f7ef;
+  background: var(--mint);
+  border-color: var(--green);
+  color: var(--green);
 }
 
+/* Dashboard UI Layout */
 main {
   max-width: 1150px;
   margin: auto;
-  padding: 30px 20px;
+  padding: 40px 20px;
 }
 
 .welcome {
@@ -253,13 +347,14 @@ main {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 40px 0;
+  padding-bottom: 40px;
 }
 
 .welcome h1 {
-  font-size: 55px;
-  letter-spacing: -3px;
-  margin: 14px 0 5px;
+  font-size: 44px;
+  color: var(--dark);
+  letter-spacing: -1px;
+  margin: 10px 0 5px;
 }
 
 .welcome h1 span {
@@ -268,118 +363,134 @@ main {
 
 .welcome p {
   color: var(--muted);
+  margin: 0;
+  font-size: 15px;
 }
 
 .farmer-id {
   background: var(--dark);
   color: #fff;
-  padding: 22px 28px;
-  border-radius: 17px;
+  padding: 20px 25px;
+  border-radius: 12px;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(27, 61, 41, 0.15);
 }
 
 .farmer-id b {
-  font-size: 24px;
+  font-size: 22px;
   font-family: monospace;
+  letter-spacing: 0.5px;
 }
 
 .quick {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .quick > div {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 15px;
-  padding: 18px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
 }
 
 .quick small, .app-grid small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .quick b {
   display: block;
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 18px;
+  color: var(--dark);
 }
 
 .card {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 28px;
-  margin-top: 20px;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
 }
 
 .card h2 {
-  font-size: 29px;
-  margin: 12px 0;
+  font-size: 24px;
+  color: var(--dark);
+  margin: 10px 0 15px;
 }
 
+/* Applications Table/Cards */
 .application {
   border: 1px solid var(--line);
-  padding: 18px;
-  border-radius: 15px;
-  margin-top: 12px;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
   background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
 }
 
 .app-top {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 12px;
+  align-items: flex-start;
+  margin-bottom: 15px;
 }
 
 .app-top p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   margin: 4px 0 0;
 }
 
 .app-top b {
   font-size: 16px;
   font-family: monospace;
+  color: var(--dark);
 }
 
 .pill {
   display: inline-block;
   background: #e9f5df;
   color: #24683a;
-  padding: 7px 12px;
+  padding: 6px 12px;
   border-radius: 99px;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   height: fit-content;
+  border: 1px solid rgba(36, 104, 58, 0.1);
 }
 
 .app-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  background: #f5f7f1;
-  padding: 14px;
-  border-radius: 12px;
+  gap: 15px;
+  background: #f8faf8;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ebf1ee;
 }
 
 .app-grid strong {
   display: block;
-  margin-top: 5px;
+  margin-top: 6px;
   font-size: 14px;
+  color: var(--dark);
 }
 
 .bar {
   height: 8px;
-  background: #e8ece5;
+  background: #ebf0ec;
   border-radius: 9px;
-  margin: 16px 0;
+  margin: 20px 0;
   overflow: hidden;
 }
 
@@ -388,18 +499,19 @@ main {
   height: 100%;
   background: var(--green);
   border-radius: 9px;
-  transition: width 0.3s ease;
+  transition: width 0.4s ease;
 }
 
 .cancel {
   border: 0;
   background: #fff0f0;
   color: var(--red);
-  padding: 8px 15px;
-  border-radius: 8px;
-  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 13px;
 }
 
 .cancel:hover {
@@ -409,11 +521,15 @@ main {
 .notice {
   display: grid;
   grid-template-columns: 120px 1fr 160px;
-  gap: 10px;
-  padding: 13px;
+  gap: 15px;
+  padding: 15px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 12px;
+  font-size: 13px;
   align-items: center;
+}
+
+.notice:last-child {
+  border-bottom: 0;
 }
 
 .notice small {
@@ -427,9 +543,9 @@ main {
 
 .empty {
   text-align: center;
-  padding: 30px;
+  padding: 40px;
   color: var(--muted);
-  background: #fafbfa;
+  background: #fbfbf9;
   border: 1px dashed var(--line);
   border-radius: 12px;
 }
@@ -438,12 +554,13 @@ main {
 .status-tracker {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
-  background: #fbfcf9;
-  padding: 15px;
-  border-radius: 10px;
+  margin: 20px 0;
+  background: #fafbfa;
+  padding: 20px;
+  border-radius: 8px;
   border: 1px solid var(--line);
   overflow-x: auto;
+  gap: 10px;
 }
 
 .status-step {
@@ -451,11 +568,11 @@ main {
   flex-direction: column;
   align-items: center;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--muted);
   flex: 1;
   text-align: center;
-  min-width: 80px;
+  min-width: 85px;
 }
 
 .status-step.completed {
@@ -463,15 +580,15 @@ main {
 }
 
 .status-step .bullet {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 2px solid var(--line);
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-size: 12px;
 }
 
@@ -483,25 +600,40 @@ main {
 
 .status-step.active .bullet {
   border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(36, 122, 69, 0.2);
+  color: var(--green);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(45, 122, 77, 0.15);
+}
+
+/* Responsive Styles */
+@media (max-width: 850px) {
+  .quick {
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
 }
 
 @media (max-width: 700px) {
-  .grid, .quick, .app-grid {
+  .grid {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
   .grid .btn, .check {
     grid-column: span 1;
   }
   .welcome {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
+    gap: 15px;
   }
   .welcome h1 {
-    font-size: 40px;
+    font-size: 32px;
   }
   .auth-card {
-    padding: 27px;
+    padding: 30px 20px;
   }
   .notice {
     grid-template-columns: 1fr;
@@ -513,20 +645,26 @@ main {
   .row-links {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
   }
   header nav a {
     display: none;
   }
   .status-tracker {
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     align-items: flex-start;
   }
   .status-step {
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-align: left;
+  }
+  .quick {
+    grid-template-columns: 1fr;
+  }
+  .app-grid {
+    grid-template-columns: 1fr;
   }
 }
