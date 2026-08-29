@@ -97,42 +97,6 @@
       "distance": 0,
       "perishable": true,
       "createdAt": "2026-08-29T05:26:35.215Z"
-    },
-    {
-      "id": "FRM43547562",
-      "name": "Amogha",
-      "phone": "7411230511",
-      "password": "r@12345",
-      "idNumber": "",
-      "crop": "",
-      "quantity": 0,
-      "distance": 0,
-      "perishable": false,
-      "createdAt": "2026-08-29T05:30:35.475Z"
-    },
-    {
-      "id": "FRM64495529",
-      "name": "hemanth",
-      "phone": "8127046717",
-      "password": "h@12345",
-      "idNumber": "",
-      "crop": "",
-      "quantity": 0,
-      "distance": 0,
-      "perishable": true,
-      "createdAt": "2026-08-29T05:34:04.955Z"
-    },
-    {
-      "id": "FRM72031670",
-      "name": "sachin",
-      "phone": "1122334455",
-      "password": "g@12345",
-      "idNumber": "",
-      "crop": "",
-      "quantity": 0,
-      "distance": 0,
-      "perishable": true,
-      "createdAt": "2026-08-29T05:35:20.316Z"
     }
   ],
   "bookings": [
@@ -280,25 +244,9 @@
       "slot": "11:00 AM - 11:30 AM",
       "priorityScore": 2,
       "priorityReason": "Priority: perishable crop",
-      "status": "Arrived",
+      "status": "Slot Booked",
       "createdAt": "2026-08-29T05:29:22.333Z",
-      "updatedAt": "2026-08-29T05:32:34.159Z"
-    },
-    {
-      "id": "APP50501632",
-      "farmerId": "FRM43547562",
-      "farmerName": "Amogha",
-      "phone": "7411230511",
-      "crop": "Sugarcane",
-      "quantity": 100,
-      "centre": "North Village Centre",
-      "date": "2026-08-29",
-      "slot": "11:00 AM - 11:30 AM",
-      "priorityScore": 1,
-      "priorityReason": "Normal",
-      "status": "Cancelled",
-      "createdAt": "2026-08-29T05:31:45.016Z",
-      "updatedAt": "2026-08-29T05:32:49.104Z"
+      "updatedAt": "2026-08-29T05:29:22.333Z"
     }
   ],
   "notifications": [
@@ -629,48 +577,6 @@
       "phone": "9887654321",
       "message": "Your AgriQueue slot booking APP36233327 is confirmed. Centre: North Village Centre, Date: 2026-08-29, Time: 11:00 AM - 11:30 AM. Queue Position: #1.",
       "createdAt": "2026-08-29T05:29:22.342Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT43548139",
-      "phone": "7411230511",
-      "message": "Welcome Amogha. Your Farmer ID is FRM43547562.",
-      "createdAt": "2026-08-29T05:30:35.481Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT50503822",
-      "phone": "7411230511",
-      "message": "Your AgriQueue slot booking APP50501632 is confirmed. Centre: North Village Centre, Date: 2026-08-29, Time: 11:00 AM - 11:30 AM. Queue Position: #2.",
-      "createdAt": "2026-08-29T05:31:45.038Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT55417020",
-      "phone": "9887654321",
-      "message": "Your turn is now. Please proceed to the procurement counter.",
-      "createdAt": "2026-08-29T05:32:34.170Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT56911868",
-      "phone": "7411230511",
-      "message": "Your AgriQueue application APP50501632 has been cancelled.",
-      "createdAt": "2026-08-29T05:32:49.118Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT64496885",
-      "phone": "8127046717",
-      "message": "Welcome hemanth. Your Farmer ID is FRM64495529.",
-      "createdAt": "2026-08-29T05:34:04.968Z",
-      "channel": "SMS-MOCK"
-    },
-    {
-      "id": "NT72033024",
-      "phone": "1122334455",
-      "message": "Welcome sachin. Your Farmer ID is FRM72031670.",
-      "createdAt": "2026-08-29T05:35:20.330Z",
       "channel": "SMS-MOCK"
     }
   ]
